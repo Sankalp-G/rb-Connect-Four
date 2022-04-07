@@ -11,4 +11,9 @@ class Board
     collumn = Array.new(6, '')
     Array.new(7, collumn)
   end
+
+  # checks if the given collumn number is full or not
+  def check_collumn(num)
+    @board[num].include?('')
+  end
 end

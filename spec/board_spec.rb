@@ -8,7 +8,6 @@ describe Board do
       it 'assigns instance variable @board to array given by #create_board' do
         arr_2d = c4_board.create_board
         board = c4_board.board
-
         expect(board).to eql(arr_2d)
       end
     end
@@ -19,19 +18,16 @@ describe Board do
 
     it 'returns 2d array with 7 collumns' do
       num_of_collumns = array_2d.length
-
       expect(num_of_collumns).to eql(7)
     end
 
     it 'returns 2d array with 6 rows (each collumn must have 6 rows)' do
       num_of_rows = array_2d.map(&:length)
-
       expect(num_of_rows).to all(eql(6))
     end
 
     it 'returns array with all empty string elements' do
       arr = array_2d.flatten
-
       expect(arr).to all(eql(''))
     end
   end

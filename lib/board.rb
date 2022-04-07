@@ -9,7 +9,8 @@ class Board
   # creates a 7x6 2d array filled with blank strings
   def create_board
     collumn = Array.new(6, '')
-    Array.new(7, collumn)
+    arr = Array.new(7, collumn)
+    arr.map(&:clone)
   end
 
   # checks if the given collumn number is full or not

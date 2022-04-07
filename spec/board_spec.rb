@@ -98,4 +98,69 @@ describe Board do
       end
     end
   end
+
+  describe '#win_condition' do
+    context 'there are no 4 in a rows' do
+      context 'in an empty board' do
+        it 'returns false' do
+          condition = c4_board.win_condition
+          expect(condition).to eql(false)
+        end
+      end
+
+      context 'in a board with random coins (no row)' do
+        before do
+          board = [['blue', 'blue', 'blue', '', '', ''],
+                   ['red', 'red', '', '', '', ''],
+                   ['blue', 'blue', 'blue', 'red', 'blue', ''],
+                   ['red', 'blue', 'blue', '', '', ''],
+                   ['red', 'red', 'red', '', '', ''],
+                   ['blue', 'blue', 'blue', '', '', ''],
+                   ['red', '', '', '', '', '']]
+          c4_board.instance_variable_set(:@board, board)
+        end
+        it 'returns false' do
+          condition = c4_board.win_condition
+          expect(condition).to eql(false)
+        end
+      end
+    end
+
+    context 'there is a 4 in a row' do
+      let(:board) { c4_board.create_board }
+
+      context 'in a collumn' do
+        before do
+          board[3] = ['blue', 'blue', 'blue', 'blue', '', '']
+          c4_board.instance_variable_set(:@board, board)
+        end
+        it 'returns true' do
+          condition = c4_board.win_condition
+          expect(condition).to eql(true)
+        end
+      end
+
+      context 'in a row' do
+        before do
+          board[1][1] = 'blue' && board[2][1] = 'blue' && board[3][1] = 'blue' && board[4][1] = 'blue'
+          c4_board.instance_variable_set(:@board, board)
+        end
+        it 'returns true' do
+          condition = c4_board.win_condition
+          expect(condition).to eql(true)
+        end
+      end
+
+      context 'in a diagonal' do
+        before do
+          board[0][0] = 'blue' && board[1][1] = 'blue' && board[2][2] = 'blue' && board[3][3] = 'blue'
+          c4_board.instance_variable_set(:@board, board)
+        end
+        it 'returns true' do
+          condition = c4_board.win_condition
+          expect(condition).to eql(true)
+        end
+      end
+    end
+  end
 end

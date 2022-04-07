@@ -71,6 +71,12 @@ describe Board do
   end
 
   describe '#drop_coin' do
+    it 'calls #check_collumn' do
+      allow(c4_board).to receive(:check_collumn) { true }
+      expect(c4_board).to receive(:check_collumn)
+      c4_board.drop_coin('blue', 2)
+    end
+
     context 'when collumn is not full' do
       before do
         board = c4_board.create_board
@@ -85,13 +91,9 @@ describe Board do
     end
 
     context 'when collumn is full' do
-      before do
-        board = c4_board.create_board
-        board[5] = %w[red red red red red red]
-        c4_board.instance_variable_set(:@board, board)
-      end
-
       it 'raises error' do
+        allow(c4_board).to receive(:check_collumn) { false }
+
         expect { c4_board.drop_coin('red', 5) }.to raise_error('Collumn full cannot drop coin')
       end
     end

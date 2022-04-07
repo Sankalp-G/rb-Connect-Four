@@ -69,4 +69,35 @@ describe Board do
       end
     end
   end
+
+  describe '#drop_coin' do
+    context 'when collumn is not full' do
+      before do
+        board = c4_board.create_board
+        board[3] = ['blue', 'blue', 'blue', '', '', '']
+        c4_board.instance_variable_set(:@board, board)
+      end
+
+      it 'adds the coin to the collumn array' do
+        changed_board = ['blue', 'blue', 'blue', 'blue', '', '']
+        expect { c4_board.drop_coin('blue', 3) }.to change { c4_board.board[3] }.to(changed_board)
+      end
+    end
+
+    context 'when collumn is full' do
+      before do
+        board = c4_board.create_board
+        board[5] = %w[red red red red red red]
+        c4_board.instance_variable_set(:@board, board)
+      end
+
+      it 'raises error' do
+        expect { c4_board.drop_coin('red', 5) }.to raise_error('Collumn full cannot drop coin')
+      end
+
+      it 'does not change board state' do
+        expect { c4_board.drop_coin('red', 5) }.not_to(change { c4_board.board })
+      end
+    end
+  end
 end

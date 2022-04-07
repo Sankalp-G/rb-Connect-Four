@@ -31,4 +31,42 @@ describe Board do
       expect(arr).to all(eql(''))
     end
   end
+
+  describe '#check_collumn' do
+    context 'when collumn is empty' do
+      subject(:empty_board) { described_class.new }
+
+      it 'returns true' do
+        output = empty_board.check_collumn(3)
+        expect(output).to eql(true)
+      end
+    end
+
+    context 'when collumn is half full' do
+      subject(:half_board) { described_class.new }
+
+      before do
+        half_array = half_board.create_board
+        half_array[1] = ['blue', 'blue', 'blue', '', '', '']
+        half_board.instance_variable_set(:@board, half_array)
+      end
+      it 'returns true' do
+        output = half_board.check_collumn(1)
+        expect(output).to eql(true)
+      end
+    end
+
+    context 'when collumn is full' do
+      subject(:full_board) { described_class.new }
+
+      before do
+        full_array = Array.new(7, Array.new(6, 'red'))
+        full_board.instance_variable_set(:@board, full_array)
+      end
+      it 'returns false' do
+        output = full_board.check_collumn(4)
+        expect(output).to eql(false)
+      end
+    end
+  end
 end

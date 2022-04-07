@@ -3,6 +3,17 @@ require_relative '../lib/board'
 describe Board do
   subject(:c4_board) { described_class.new }
 
+  describe '#initialize' do
+    context 'when Board is initialized' do
+      it 'assigns instance variable @board to array given by #create_board' do
+        arr_2d = c4_board.create_board
+        board = c4_board.board
+
+        expect(board).to eql(arr_2d)
+      end
+    end
+  end
+
   describe '#create_board' do
     let(:array_2d) { c4_board.create_board }
 

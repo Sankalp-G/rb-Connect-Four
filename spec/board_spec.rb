@@ -94,10 +94,6 @@ describe Board do
       it 'raises error' do
         expect { c4_board.drop_coin('red', 5) }.to raise_error('Collumn full cannot drop coin')
       end
-
-      it 'does not change board state' do
-        expect { c4_board.drop_coin('red', 5) }.not_to(change { c4_board.board })
-      end
     end
   end
 end

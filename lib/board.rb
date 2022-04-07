@@ -16,4 +16,18 @@ class Board
   def check_collumn(num)
     @board[num].include?('')
   end
+
+  # checks if a collumn is empty if so it adds the coin to the first empty slot
+  def drop_coin(coin, collumn_index)
+    raise 'Collumn full cannot drop coin' unless check_collumn(collumn_index)
+
+    collumn = @board[collumn_index]
+    collumn.each_with_index do |cell, index|
+      if cell == ''
+        collumn[index] = coin
+        break
+      end
+    end
+    @board[collumn_index] = collumn
+  end
 end

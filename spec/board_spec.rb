@@ -136,7 +136,7 @@ describe Board do
         end
         xit 'returns true' do
           condition = c4_board.win_condition
-          expect(condition).to eql(true)
+          expect(condition).to eql('blue')
         end
       end
 
@@ -147,7 +147,7 @@ describe Board do
         end
         xit 'returns true' do
           condition = c4_board.win_condition
-          expect(condition).to eql(true)
+          expect(condition).to eql('blue')
         end
       end
 
@@ -158,7 +158,7 @@ describe Board do
         end
         xit 'returns true' do
           condition = c4_board.win_condition
-          expect(condition).to eql(true)
+          expect(condition).to eql('blue')
         end
       end
     end
@@ -186,19 +186,19 @@ describe Board do
         it 'returns true' do
           array = ['', 'blue', 'blue', 'blue', 'blue', '']
           output = c4_board.check_index_array(array)
-          expect(output).to eql(true)
+          expect(output).to eql('blue')
         end
         it 'returns true' do
           array = ['', '', 'red', 'red', 'red', 'red', 'red']
           output = c4_board.check_index_array(array)
-          expect(output).to eql(true)
+          expect(output).to eql('red')
         end
       end
       context 'array with multiple elements' do
         it 'returns true' do
           array = ['red', 'blue', 'blue', 'blue', 'blue', 'green']
           output = c4_board.check_index_array(array)
-          expect(output).to eql(true)
+          expect(output).to eql('blue')
         end
       end
     end

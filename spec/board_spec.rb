@@ -196,7 +196,7 @@ describe Board do
       end
       context 'array with multiple elements' do
         it 'returns true' do
-          array = ['red', 'blue', 'blue', 'blue', 'blue', 'green']
+          array = %w[red blue blue blue blue green]
           output = c4_board.check_index_array(array)
           expect(output).to eql('blue')
         end

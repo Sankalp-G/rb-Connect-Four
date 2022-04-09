@@ -16,12 +16,12 @@ describe Board do
   describe '#create_board' do
     let(:array_2d) { c4_board.create_board }
 
-    it 'returns 2d array with 7 collumns' do
-      num_of_collumns = array_2d.length
-      expect(num_of_collumns).to eql(7)
+    it 'returns 2d array with 7 columns' do
+      num_of_columns = array_2d.length
+      expect(num_of_columns).to eql(7)
     end
 
-    it 'returns 2d array with 6 rows (each collumn must have 6 rows)' do
+    it 'returns 2d array with 6 rows (each column must have 6 rows)' do
       num_of_rows = array_2d.map(&:length)
       expect(num_of_rows).to all(eql(6))
     end
@@ -32,17 +32,17 @@ describe Board do
     end
   end
 
-  describe '#check_collumn' do
-    context 'when collumn is empty' do
+  describe '#check_column' do
+    context 'when column is empty' do
       subject(:empty_board) { described_class.new }
 
       it 'returns true' do
-        output = empty_board.check_collumn(3)
+        output = empty_board.check_column(3)
         expect(output).to eql(true)
       end
     end
 
-    context 'when collumn is half full' do
+    context 'when column is half full' do
       subject(:half_board) { described_class.new }
 
       before do
@@ -51,12 +51,12 @@ describe Board do
         half_board.instance_variable_set(:@board, half_array)
       end
       it 'returns true' do
-        output = half_board.check_collumn(1)
+        output = half_board.check_column(1)
         expect(output).to eql(true)
       end
     end
 
-    context 'when collumn is full' do
+    context 'when column is full' do
       subject(:full_board) { described_class.new }
 
       before do
@@ -64,37 +64,37 @@ describe Board do
         full_board.instance_variable_set(:@board, full_array)
       end
       it 'returns false' do
-        output = full_board.check_collumn(4)
+        output = full_board.check_column(4)
         expect(output).to eql(false)
       end
     end
   end
 
   describe '#drop_coin' do
-    it 'calls #check_collumn' do
-      allow(c4_board).to receive(:check_collumn) { true }
-      expect(c4_board).to receive(:check_collumn)
+    it 'calls #check_column' do
+      allow(c4_board).to receive(:check_column) { true }
+      expect(c4_board).to receive(:check_column)
       c4_board.drop_coin('blue', 2)
     end
 
-    context 'when collumn is not full' do
+    context 'when column is not full' do
       before do
         board = c4_board.create_board
         board[3] = ['blue', 'blue', 'blue', '', '', '']
         c4_board.instance_variable_set(:@board, board)
       end
 
-      it 'adds the coin to the collumn array' do
+      it 'adds the coin to the column array' do
         changed_board = ['blue', 'blue', 'blue', 'blue', '', '']
         expect { c4_board.drop_coin('blue', 3) }.to change { c4_board.board[3] }.to(changed_board)
       end
     end
 
-    context 'when collumn is full' do
+    context 'when column is full' do
       it 'raises error' do
-        allow(c4_board).to receive(:check_collumn) { false }
+        allow(c4_board).to receive(:check_column) { false }
 
-        expect { c4_board.drop_coin('red', 5) }.to raise_error('Collumn full cannot drop coin')
+        expect { c4_board.drop_coin('red', 5) }.to raise_error('column full cannot drop coin')
       end
     end
   end
@@ -129,7 +129,7 @@ describe Board do
     context 'there is a 4 in a row' do
       let(:board) { c4_board.create_board }
 
-      context 'in a collumn' do
+      context 'in a column' do
         before do
           board[3] = ['blue', 'blue', 'blue', 'blue', '', '']
           c4_board.instance_variable_set(:@board, board)

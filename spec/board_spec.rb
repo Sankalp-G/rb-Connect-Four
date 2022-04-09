@@ -164,19 +164,19 @@ describe Board do
     end
   end
 
-  describe '#check_index_array' do
+  describe '#check_array' do
     context 'array doesnt contain four consecutive elements' do
       context 'array with only blank strings' do
         it 'returns false' do
           array = ['', '', '', '', '', '']
-          output = c4_board.check_index_array(array)
+          output = c4_board.check_array(array)
           expect(output).to eql(false)
         end
       end
       context 'array with multiple elements' do
         it 'returns false' do
           array = ['blue', 'blue', 'red', 2, 3, 'blue', 'blue']
-          output = c4_board.check_index_array(array)
+          output = c4_board.check_array(array)
           expect(output).to eql(false)
         end
       end
@@ -185,19 +185,19 @@ describe Board do
       context 'array with some blank strings' do
         it 'returns true' do
           array = ['', 'blue', 'blue', 'blue', 'blue', '']
-          output = c4_board.check_index_array(array)
+          output = c4_board.check_array(array)
           expect(output).to eql('blue')
         end
         it 'returns true' do
           array = ['', '', 'red', 'red', 'red', 'red', 'red']
-          output = c4_board.check_index_array(array)
+          output = c4_board.check_array(array)
           expect(output).to eql('red')
         end
       end
       context 'array with multiple elements' do
         it 'returns true' do
           array = %w[red blue blue blue blue green]
-          output = c4_board.check_index_array(array)
+          output = c4_board.check_array(array)
           expect(output).to eql('blue')
         end
       end

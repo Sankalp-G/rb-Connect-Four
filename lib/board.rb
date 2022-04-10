@@ -40,4 +40,15 @@ class Board
     sliced.each { |arr| return arr[0] if arr.length >= 4 && arr[0] != '' }
     false
   end
+
+  # returns rows converted from @board
+  def grab_rows
+    rows = Array.new(6) { [] }
+    @board.each do |column|
+      column.each_with_index do |element, row_index|
+        rows[row_index].push(element)
+      end
+    end
+    rows
+  end
 end

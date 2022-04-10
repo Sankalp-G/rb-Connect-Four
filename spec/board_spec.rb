@@ -203,4 +203,53 @@ describe Board do
       end
     end
   end
+
+  # expect all items of an enum to have given length
+  RSpec::Matchers.define :all_have_length do |expected_length|
+    match do |enum|
+      enum.all? { |item| item.length == expected_length }
+    end
+  end
+
+  describe '#grab_rows' do
+    context 'with a 7x6 blank string board' do
+      it 'returns a 6x7 array' do
+        rows = c4_board.grab_rows
+        num_of_rows = rows.length
+
+        expect(num_of_rows).to eql(6)
+        expect(rows).to all_have_length(7)
+      end
+    end
+
+    context 'with a 7x6 random element board' do
+      before do
+        input_board = [['blue', 'blue', 'blue', '', '', ''],
+                       ['red', 'red', '', '', '', ''],
+                       ['blue', 'blue', 'blue', 'red', 'blue', ''],
+                       ['red', 'blue', 'blue', '', '', ''],
+                       ['red', 'red', 'red', '', '', ''],
+                       ['blue', 'blue', 'blue', '', '', ''],
+                       ['red', '', '', '', '', '']]
+        c4_board.instance_variable_set(:@board, input_board)
+      end
+
+      it 'returns a 6x7 array' do
+        rows = c4_board.grab_rows
+        num_of_rows = rows.length
+
+        expect(num_of_rows).to eql(6)
+        expect(rows).to all_have_length(7)
+      end
+      it 'returns the rows' do
+        output = [['blue', 'red', 'blue', 'red', 'red', 'blue', 'red'],
+                  ['blue', 'red', 'blue', 'blue', 'red', 'blue', ''],
+                  ['blue', '', 'blue', 'blue', 'red', 'blue', ''],
+                  ['', '', 'red', '', '', '', ''],
+                  ['', '', 'blue', '', '', '', ''],
+                  ['', '', '', '', '', '', '']]
+        expect(c4_board.grab_rows).to eql(output)
+      end
+    end
+  end
 end

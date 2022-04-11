@@ -32,15 +32,6 @@ class Board
     @board[column_index] = column
   end
 
-  # returns element if element occurs 4 or more times consecutively in given array
-  # returns false otherwise, blank strings are ignored
-  def check_array(array)
-    sliced = array.slice_when { |before, after| before != after }
-
-    sliced.each { |arr| return arr[0] if arr.length >= 4 && arr[0] != '' }
-    false
-  end
-
   # returns rows converted from @board
   def grab_rows
     rows = Array.new(6) { [] }
@@ -50,5 +41,25 @@ class Board
       end
     end
     rows
+  end
+
+  # returns element if element occurs 4 or more times consecutively in given array
+  # returns false otherwise, blank strings are ignored
+  def check_array(array)
+    sliced = array.slice_when { |before, after| before != after }
+
+    sliced.each { |arr| return arr[0] if arr.length >= 4 && arr[0] != '' }
+    false
+  end
+
+  # checks all column in @board for 4 consecutive elements, returns element if found else false
+  def check_columns
+    @board.each { |column| return check_array(column) if check_array(column) }
+  end
+
+  # checks all row in @board for 4 consecutive elements, returns element if found else false
+  def check_rows
+    rows = grab_rows
+    rows.each { |row| return check_array(row) if check_array(row) }
   end
 end

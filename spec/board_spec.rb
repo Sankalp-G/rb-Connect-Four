@@ -244,13 +244,14 @@ describe Board do
         expect(rows).to all_have_length(7)
       end
       it 'returns the rows' do
-        output = [['blue', 'red', 'blue', 'red', 'red', 'blue', 'red'],
-                  ['blue', 'red', 'blue', 'blue', 'red', 'blue', ''],
-                  ['blue', '', 'blue', 'blue', 'red', 'blue', ''],
-                  ['', '', 'red', '', '', '', ''],
-                  ['', '', 'blue', '', '', '', ''],
-                  ['', '', '', '', '', '', '']]
-        expect(c4_board.grab_rows).to eql(output)
+        expected_rows = [['blue', 'red', 'blue', 'red', 'red', 'blue', 'red'],
+                         ['blue', 'red', 'blue', 'blue', 'red', 'blue', ''],
+                         ['blue', '', 'blue', 'blue', 'red', 'blue', ''],
+                         ['', '', 'red', '', '', '', ''],
+                         ['', '', 'blue', '', '', '', ''],
+                         ['', '', '', '', '', '', '']]
+        output_rows = c4_board.grab_rows
+        expect(output_rows).to eql(expected_rows)
       end
     end
   end

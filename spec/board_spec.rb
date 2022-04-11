@@ -1,5 +1,7 @@
 require_relative '../lib/board'
 
+# rubocop: disable Style/WordArray
+
 describe Board do
   subject(:c4_board) { described_class.new }
 
@@ -252,4 +254,46 @@ describe Board do
       end
     end
   end
+
+  describe '#grab_diagonals' do
+    context 'columns are not the same length' do
+      before do
+        input_board = [['', '', '', ''],
+                       ['', '', ''],
+                       ['', '', '', ''],
+                       ['', '', '', '']]
+        c4_board.instance_variable_set(:@board, input_board)
+      end
+      it 'raises an error' do
+        expect { c4_board.grab_diagonals }.to raise_error('columns must be of equal length')
+      end
+    end
+    context 'with a random board' do
+      before do
+        input_board = [['blue', 'blue', 'blue',   '',    '',     ''],
+                       ['red',  'red',   '',      '',    '',     ''],
+                       ['blue', 'blue',  'blue',  'red', 'blue', ''],
+                       ['red',  'blue',  'blue',  '',    '',     ''],
+                       ['red',  'red',   'red',   '',    '',     ''],
+                       ['blue', 'blue',  'blue',  '',    '',     ''],
+                       ['red',  '',      '',      '',    '',     '']]
+        c4_board.instance_variable_set(:@board, input_board)
+      end
+      it 'returns arrays of all diagonals' do
+        expected = [['red'], ['blue', ''], ['red', 'blue', ''], ['red', 'red', 'blue', ''],
+                    ['blue', 'blue', 'red', '', ''], ['red', 'blue', 'blue', '', '', ''],
+                    ['blue', 'red', 'blue', '', '', ''], ['blue', '', 'red', '', ''], ['blue', '', 'blue', ''],
+                    ['', '', ''], ['', ''], [''], ['blue'], ['red', 'blue'], ['blue', 'red', 'blue'],
+                    ['red', 'blue', '', ''], ['red', 'blue', 'blue', '', ''],
+                    ['blue', 'red', 'blue', 'red', '', ''], ['red', 'blue', 'red', '', 'blue', ''],
+                    ['', 'blue', '', '', ''], ['', '', '', ''], ['', '', ''], ['', ''], ['']]
+
+        output = c4_board.grab_diagonals
+        is_same = output.sort == expected.sort
+        expect(is_same).to eql(true)
+      end
+    end
+  end
 end
+
+# rubocop: enable Style/WordArray

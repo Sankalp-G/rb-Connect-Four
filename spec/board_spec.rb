@@ -112,13 +112,13 @@ describe Board do
 
       context 'in a board with random coins (no row)' do
         before do
-          board = [['blue', 'blue', 'blue', '', '', ''],
-                   ['red', 'red', '', '', '', ''],
-                   ['blue', 'blue', 'blue', 'red', 'blue', ''],
-                   ['red', 'blue', 'blue', '', '', ''],
-                   ['red', 'red', 'red', '', '', ''],
-                   ['blue', 'blue', 'blue', '', '', ''],
-                   ['red', '', '', '', '', '']]
+          board = [['blue', 'blue', 'blue',   '',    '',     ''],
+                   ['red',  'red',   '',      '',    '',     ''],
+                   ['blue', 'blue',  'blue',  'red', 'blue', ''],
+                   ['red',  'blue',  'blue',  '',    '',     ''],
+                   ['red',  'red',   'red',   '',    '',     ''],
+                   ['blue', 'blue',  'blue',  '',    '',     ''],
+                   ['red',  '',      '',      '',    '',     '']]
           c4_board.instance_variable_set(:@board, board)
         end
         it 'returns false' do
@@ -226,13 +226,13 @@ describe Board do
 
     context 'with a 7x6 random element board' do
       before do
-        input_board = [['blue', 'blue', 'blue', '', '', ''],
-                       ['red', 'red', '', '', '', ''],
-                       ['blue', 'blue', 'blue', 'red', 'blue', ''],
-                       ['red', 'blue', 'blue', '', '', ''],
-                       ['red', 'red', 'red', '', '', ''],
-                       ['blue', 'blue', 'blue', '', '', ''],
-                       ['red', '', '', '', '', '']]
+        input_board = [['blue', 'blue', 'blue',   '',    '',     ''],
+                       ['red',  'red',   '',      '',    '',     ''],
+                       ['blue', 'blue',  'blue',  'red', 'blue', ''],
+                       ['red',  'blue',  'blue',  '',    '',     ''],
+                       ['red',  'red',   'red',   '',    '',     ''],
+                       ['blue', 'blue',  'blue',  '',    '',     ''],
+                       ['red',  '',      '',      '',    '',     '']]
         c4_board.instance_variable_set(:@board, input_board)
       end
 
@@ -244,12 +244,12 @@ describe Board do
         expect(rows).to all_have_length(7)
       end
       it 'returns the rows' do
-        expected_rows = [['blue', 'red', 'blue', 'red', 'red', 'blue', 'red'],
+        expected_rows = [['blue', 'red', 'blue', 'red',  'red', 'blue', 'red'],
                          ['blue', 'red', 'blue', 'blue', 'red', 'blue', ''],
-                         ['blue', '', 'blue', 'blue', 'red', 'blue', ''],
-                         ['', '', 'red', '', '', '', ''],
-                         ['', '', 'blue', '', '', '', ''],
-                         ['', '', '', '', '', '', '']]
+                         ['blue', '',    'blue', 'blue', 'red', 'blue', ''],
+                         ['',     '',    'red',  '',     '',    '',     ''],
+                         ['',     '',    'blue', '',     '',    '',     ''],
+                         ['',     '',    '',     '',     '',    '',     '']]
         output_rows = c4_board.grab_rows
         expect(output_rows).to eql(expected_rows)
       end

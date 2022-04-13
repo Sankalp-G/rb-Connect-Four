@@ -104,7 +104,7 @@ describe Board do
   describe '#win_condition' do
     context 'there are no 4 in a rows' do
       context 'in an empty board' do
-        xit 'returns false' do
+        it 'returns false' do
           condition = c4_board.win_condition
           expect(condition).to eql(false)
         end
@@ -121,7 +121,7 @@ describe Board do
                    ['red', '', '', '', '', '']]
           c4_board.instance_variable_set(:@board, board)
         end
-        xit 'returns false' do
+        it 'returns false' do
           condition = c4_board.win_condition
           expect(condition).to eql(false)
         end
@@ -136,7 +136,7 @@ describe Board do
           board[3] = ['blue', 'blue', 'blue', 'blue', '', '']
           c4_board.instance_variable_set(:@board, board)
         end
-        xit 'returns true' do
+        it 'returns true' do
           condition = c4_board.win_condition
           expect(condition).to eql('blue')
         end
@@ -147,7 +147,7 @@ describe Board do
           board[1][1] = 'blue' && board[2][1] = 'blue' && board[3][1] = 'blue' && board[4][1] = 'blue'
           c4_board.instance_variable_set(:@board, board)
         end
-        xit 'returns true' do
+        it 'returns true' do
           condition = c4_board.win_condition
           expect(condition).to eql('blue')
         end
@@ -158,7 +158,7 @@ describe Board do
           board[0][0] = 'blue' && board[1][1] = 'blue' && board[2][2] = 'blue' && board[3][3] = 'blue'
           c4_board.instance_variable_set(:@board, board)
         end
-        xit 'returns true' do
+        it 'returns true' do
           condition = c4_board.win_condition
           expect(condition).to eql('blue')
         end

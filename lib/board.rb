@@ -63,6 +63,12 @@ class Board
     rows.each { |row| return check_array(row) if check_array(row) }
   end
 
+  # checks all diagonals in @board for 4 consecutive elements, returns element if found else false
+  def check_diagonals
+    diagonals = grab_diagonals
+    diagonals.each { |diag| return check_array(diag) if check_array(diag) }
+  end
+
   # returns all diagonals of the board not just the main two, raises error if columns aren't of equal length
   def grab_diagonals
     raise 'columns must be of equal length' unless @board.all? { |column| @board[0].length == column.length }

@@ -87,17 +87,20 @@ class Board
   # checks all column in @board for 4 consecutive elements, returns element if found else false
   def check_columns
     @board.each { |column| return check_array(column) if check_array(column) }
+    false
   end
 
   # checks all row in @board for 4 consecutive elements, returns element if found else false
   def check_rows
     rows = grab_rows
     rows.each { |row| return check_array(row) if check_array(row) }
+    false
   end
 
   # checks all diagonals in @board for 4 consecutive elements, returns element if found else false
   def check_diagonals
     diagonals = grab_diagonals
     diagonals.each { |diag| return check_array(diag) if check_array(diag) }
+    false
   end
 end

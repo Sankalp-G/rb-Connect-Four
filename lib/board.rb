@@ -62,4 +62,27 @@ class Board
     rows = grab_rows
     rows.each { |row| return check_array(row) if check_array(row) }
   end
+
+  # returns all diagonals of the board not just the main two, raises error if columns aren't of equal length
+  def grab_diagonals
+    raise 'columns must be of equal length' unless @board.all? { |column| @board[0].length == column.length }
+
+    padding = Array.new(@board.length - 1, nil)
+    padded_board = @board.map { |column| padding + column + padding }
+    reversed_board = padded_board.map(&:reverse)
+    padded_diagonals(padded_board) + padded_diagonals(reversed_board)
+  end
+
+  # goes through a padded array and returns diagonal elements (with a lot of extra nil values)
+  def padded_diagonals(padded_board)
+    diagonals_array = []
+    diagonal_limit = ((padded_board[0].length + 2) * 2 / 3) - 1
+
+    diagonal_limit.times do |index|
+      one_diagonal = []
+      padded_board.length.times { |i| one_diagonal.push(padded_board[i][i + index]) }
+      diagonals_array.push(one_diagonal)
+    end
+    diagonals_array
+  end
 end

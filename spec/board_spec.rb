@@ -34,12 +34,12 @@ describe Board do
     end
   end
 
-  describe '#check_column' do
+  describe '#column_full?' do
     context 'when column is empty' do
       subject(:empty_board) { described_class.new }
 
       it 'returns true' do
-        output = empty_board.check_column(3)
+        output = empty_board.column_full?(3)
         expect(output).to eql(true)
       end
     end
@@ -53,7 +53,7 @@ describe Board do
         half_board.instance_variable_set(:@board, half_array)
       end
       it 'returns true' do
-        output = half_board.check_column(1)
+        output = half_board.column_full?(1)
         expect(output).to eql(true)
       end
     end
@@ -66,16 +66,16 @@ describe Board do
         full_board.instance_variable_set(:@board, full_array)
       end
       it 'returns false' do
-        output = full_board.check_column(4)
+        output = full_board.column_full?(4)
         expect(output).to eql(false)
       end
     end
   end
 
   describe '#drop_coin' do
-    it 'calls #check_column' do
-      allow(c4_board).to receive(:check_column) { true }
-      expect(c4_board).to receive(:check_column)
+    it 'calls #column_full?' do
+      allow(c4_board).to receive(:column_full?) { true }
+      expect(c4_board).to receive(:column_full?)
       c4_board.drop_coin('blue', 2)
     end
 
@@ -94,7 +94,7 @@ describe Board do
 
     context 'when column is full' do
       it 'raises error' do
-        allow(c4_board).to receive(:check_column) { false }
+        allow(c4_board).to receive(:column_full?) { false }
 
         expect { c4_board.drop_coin('red', 5) }.to raise_error('column full cannot drop coin')
       end

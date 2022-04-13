@@ -14,13 +14,13 @@ class Board
   end
 
   # checks if the given column number is full or not
-  def check_column(num)
+  def column_full?(num)
     @board[num].include?('')
   end
 
   # checks if a column is empty if so it adds the coin to the first empty slot
   def drop_coin(coin, column_index)
-    raise 'column full cannot drop coin' unless check_column(column_index)
+    raise 'column full cannot drop coin' unless column_full?(column_index)
 
     column = @board[column_index]
     column.each_with_index do |cell, index|

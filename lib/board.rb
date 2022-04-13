@@ -61,6 +61,9 @@ class Board
     false
   end
 
+  ### start of private methods
+  private
+
   # takes a padded board and returns all diagonal elements with nil values removed
   def process_padded_board(padded_board)
     reversed_board = padded_board.reverse

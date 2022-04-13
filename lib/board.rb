@@ -69,8 +69,7 @@ class Board
 
     padding = Array.new(@board.length - 1, nil)
     padded_board = @board.map { |column| padding + column + padding }
-    reversed_board = padded_board.map(&:reverse)
-    padded_diagonals(padded_board) + padded_diagonals(reversed_board)
+    process_padded_board(padded_board)
   end
 
   # goes through a padded array and returns diagonal elements (with a lot of extra nil values)
@@ -84,5 +83,12 @@ class Board
       diagonals_array.push(one_diagonal)
     end
     diagonals_array
+  end
+
+  # takes a padded board and returns all diagonal elements with nil values removed
+  def process_padded_board(padded_board)
+    reversed_board = padded_board.reverse
+    diagonals = padded_diagonals(padded_board) + padded_diagonals(reversed_board)
+    diagonals.map(&:compact)
   end
 end

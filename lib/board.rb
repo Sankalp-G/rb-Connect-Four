@@ -61,6 +61,15 @@ class Board
     false
   end
 
+  # returns element if it occurs consecutively 4 or more times in the entire board else returns false
+  def win_condition
+    return check_columns if check_columns
+    return check_rows if check_rows
+    return check_diagonals if check_diagonals
+
+    false
+  end
+
   ### start of private methods
   private
 

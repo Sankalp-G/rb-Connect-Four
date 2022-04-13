@@ -43,6 +43,15 @@ class Board
     rows
   end
 
+  # returns all diagonals of the board not just the main two, raises error if columns aren't of equal length
+  def grab_diagonals
+    raise 'columns must be of equal length' unless @board.all? { |column| @board[0].length == column.length }
+
+    padding = Array.new(@board.length - 1, nil)
+    padded_board = @board.map { |column| padding + column + padding }
+    process_padded_board(padded_board)
+  end
+
   # returns element if element occurs 4 or more times consecutively in given array
   # returns false otherwise, blank strings are ignored
   def check_array(array)
@@ -50,6 +59,26 @@ class Board
 
     sliced.each { |arr| return arr[0] if arr.length >= 4 && arr[0] != '' }
     false
+  end
+
+  # takes a padded board and returns all diagonal elements with nil values removed
+  def process_padded_board(padded_board)
+    reversed_board = padded_board.reverse
+    diagonals = padded_diagonals(padded_board) + padded_diagonals(reversed_board)
+    diagonals.map(&:compact)
+  end
+
+  # goes through a padded array and returns diagonal elements (with a lot of extra nil values)
+  def padded_diagonals(padded_board)
+    diagonals_array = []
+    diagonal_limit = ((padded_board[0].length + 2) * 2 / 3) - 1
+
+    diagonal_limit.times do |index|
+      one_diagonal = []
+      padded_board.length.times { |i| one_diagonal.push(padded_board[i][i + index]) }
+      diagonals_array.push(one_diagonal)
+    end
+    diagonals_array
   end
 
   # checks all column in @board for 4 consecutive elements, returns element if found else false
@@ -67,34 +96,5 @@ class Board
   def check_diagonals
     diagonals = grab_diagonals
     diagonals.each { |diag| return check_array(diag) if check_array(diag) }
-  end
-
-  # returns all diagonals of the board not just the main two, raises error if columns aren't of equal length
-  def grab_diagonals
-    raise 'columns must be of equal length' unless @board.all? { |column| @board[0].length == column.length }
-
-    padding = Array.new(@board.length - 1, nil)
-    padded_board = @board.map { |column| padding + column + padding }
-    process_padded_board(padded_board)
-  end
-
-  # goes through a padded array and returns diagonal elements (with a lot of extra nil values)
-  def padded_diagonals(padded_board)
-    diagonals_array = []
-    diagonal_limit = ((padded_board[0].length + 2) * 2 / 3) - 1
-
-    diagonal_limit.times do |index|
-      one_diagonal = []
-      padded_board.length.times { |i| one_diagonal.push(padded_board[i][i + index]) }
-      diagonals_array.push(one_diagonal)
-    end
-    diagonals_array
-  end
-
-  # takes a padded board and returns all diagonal elements with nil values removed
-  def process_padded_board(padded_board)
-    reversed_board = padded_board.reverse
-    diagonals = padded_diagonals(padded_board) + padded_diagonals(reversed_board)
-    diagonals.map(&:compact)
   end
 end

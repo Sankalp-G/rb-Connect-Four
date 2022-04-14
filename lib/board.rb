@@ -1,3 +1,5 @@
+require 'colorize'
+
 # board class for connect four
 class Board
   attr_reader :board

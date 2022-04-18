@@ -3,9 +3,11 @@ require 'colorize'
 # board class for connect four
 class Board
   attr_reader :board
+  attr_accessor :coin
 
   def initialize
     @board = create_board
+    @coin = '⬤'
   end
 
   # creates a 7x6 2d array filled with blank strings
@@ -113,5 +115,13 @@ class Board
     diagonals = grab_diagonals
     diagonals.each { |diag| return check_array(diag) if check_array(diag) }
     false
+  end
+
+  # uses colorize gem to return a colored coin using color from parameter
+  # if parameter given is a blank string returns a black coin with a black background
+  def color_coin(color)
+    return @coin.colorize(color: :black, background: :black) if color == ''
+
+    @coin.colorize(color: color.to_sym, background: :black)
   end
 end

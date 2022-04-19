@@ -74,6 +74,17 @@ class Board
     false
   end
 
+  # prints the board with colored coins, separated by '|'
+  def display_board
+    board = grab_rows.reverse
+    separator = '|'.colorize(color: :white, background: :black)
+    board.each do |row|
+      print separator
+      row.each { |coin| print color_coin(coin), separator }
+      puts
+    end
+  end
+
   ### start of private methods
   private
 

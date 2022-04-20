@@ -28,4 +28,16 @@ class ConnectFour
     index = input_index - 1
     @game_board.drop_coin(player_color, index)
   end
+
+  # starts a game between red and blue, returns winning color
+  def init_rounds
+    current_player = 'blue'
+    condition = @game_board.win_condition
+    until condition
+      one_round(current_player)
+      current_player = current_player == 'blue' ? 'red' : 'blue'
+      condition = @game_board.win_condition
+    end
+    condition
+  end
 end

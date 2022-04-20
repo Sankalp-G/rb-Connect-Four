@@ -19,11 +19,11 @@ describe ConnectFour do
           invalid_inputs = %w[8 0]
           valid_input = '3'
           allow(cfour).to receive(:gets).and_return(*invalid_inputs, valid_input)
-          allow(cfour).to receive(:puts)
+          allow(DisplayPrint).to receive(:puts)
         end
         it 'puts error twice' do
           printed_error = "\n\nInvalid Input, input must be a number from 1 to 7\nTry Again"
-          expect(cfour).to receive(:puts).with(printed_error).twice
+          expect(DisplayPrint).to receive(:puts).with(printed_error).twice
           cfour.input_index
         end
         it 'returns valid input as integer' do

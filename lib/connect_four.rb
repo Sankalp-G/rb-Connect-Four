@@ -40,4 +40,9 @@ class ConnectFour
     end
     condition
   end
+
+  # allow you to change the symbol used for each coin
+  def change_coin(coin_face)
+    @game_board.coin = coin_face
+  end
 end

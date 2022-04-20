@@ -1,7 +1,12 @@
+require_relative 'board'
 require_relative 'display_print'
 
 # class used to interact with Board and handle player inputs
 class ConnectFour
+  def initialize
+    @game_board = Board.new
+  end
+
   # gets input from terminal and returns input as integer, retries if invalid
   def input_index
     input = gets.chomp
@@ -11,5 +16,16 @@ class ConnectFour
   rescue StandardError
     DisplayPrint.input_index_error
     retry
+  end
+
+  # acts as an visual interface to #drop_coin, does not check if game is won
+  def one_round(player_color)
+    system('clear') || system('cls') # clear console
+
+    @game_board.display_board
+    DisplayPrint.player_turn(player_color)
+
+    index = input_index - 1
+    @game_board.drop_coin(player_color, index)
   end
 end

@@ -13,7 +13,7 @@ class ConnectFour
     raise 'invalid input' unless input =~ /^[1-7]$/ # input must be between 1 to 7
 
     index = input.to_i - 1
-    raise 'column full' unless @game_board.column_full?(index)
+    raise 'column full' if @game_board.column_full?(index)
 
     index
   rescue StandardError => e

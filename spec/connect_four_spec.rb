@@ -42,7 +42,7 @@ describe ConnectFour do
 
           full_column_index = '2'
           allow(cfour).to receive(:gets).and_return(full_column_index)
-          allow(column_board).to receive(:column_full?).and_return(false, false, false, true)
+          allow(column_board).to receive(:column_full?).and_return(true, true, true, false)
           allow(DisplayPrint).to receive(:puts)
         end
         it 'puts error thrice' do

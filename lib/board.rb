@@ -17,14 +17,15 @@ class Board
     arr.map(&:clone)
   end
 
-  # checks if the given column number is full or not
+  # checks if the given column number is full or not, true if full
   def column_full?(num)
-    @board[num].include?('')
+    not_full = @board[num].include?('')
+    !not_full
   end
 
   # checks if a column is empty if so it adds the coin to the first empty slot
   def drop_coin(coin, column_index)
-    raise 'column full cannot drop coin' unless column_full?(column_index)
+    raise 'column full cannot drop coin' if column_full?(column_index)
 
     column = @board[column_index]
     column.each_with_index do |cell, index|

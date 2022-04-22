@@ -6,6 +6,10 @@ module DisplayPrint
     puts "\n\nInvalid Input, input must be a number from 1 to 7\nTry Again"
   end
 
+  def self.column_full_error
+    puts "\n\nThat column is full, Choose a different column\n"
+  end
+
   def self.player_turn(player_color)
     player_name = player_color.colorize(color: :black, background: player_color.to_sym)
     puts "\n#{player_name} Turn:"

@@ -11,10 +11,11 @@ describe ConnectFour do
         allow(cfour).to receive(:gets).and_return(valid_input)
       end
       it 'returns input as integer' do
-        expect(cfour.input_index).to eql(5)
+        expect(cfour.input_index).to eql(4)
       end
     end
-    context 'invalid input' do
+
+    context 'invalid index' do
       context 'invalid input twice then valid input' do
         before do
           invalid_inputs = %w[8 0]
@@ -23,12 +24,34 @@ describe ConnectFour do
           allow(DisplayPrint).to receive(:puts)
         end
         it 'puts error twice' do
-          printed_error = "\n\nInvalid Input, input must be a number from 1 to 7\nTry Again"
-          expect(DisplayPrint).to receive(:puts).with(printed_error).twice
+          expect(DisplayPrint).to receive(:input_index_error).twice
           cfour.input_index
         end
         it 'returns valid input as integer' do
-          expect(cfour.input_index).to eql(3)
+          expect(cfour.input_index).to eql(2)
+        end
+      end
+    end
+
+    context 'column full' do
+      context 'invalid input thrice then valid input' do
+        let(:column_board) { instance_double(Board) }
+
+        before do
+          cfour.instance_variable_set(:@game_board, column_board)
+
+          full_column_index = '2'
+          allow(cfour).to receive(:gets).and_return(full_column_index)
+          allow(column_board).to receive(:column_full?).and_return(false, false, false, true)
+          allow(DisplayPrint).to receive(:puts)
+        end
+        it 'puts error thrice' do
+          printed_error = "\n\nThat column is full, Choose a different column\n"
+          expect(DisplayPrint).to receive(:puts).with(printed_error).exactly(3).times
+          cfour.input_index
+        end
+        it 'returns valid input as integer' do
+          expect(cfour.input_index).to eql(1)
         end
       end
     end

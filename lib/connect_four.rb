@@ -10,11 +10,15 @@ class ConnectFour
   # gets input from terminal and returns input as integer, retries if invalid
   def input_index
     input = gets.chomp
-    raise unless input =~ /^[1-7]$/ # input must be between 1 to 7
+    raise 'invalid input' unless input =~ /^[1-7]$/ # input must be between 1 to 7
 
-    input.to_i
-  rescue StandardError
-    DisplayPrint.input_index_error
+    index = input.to_i - 1
+    raise 'column full' unless @game_board.column_full?(index)
+
+    index
+  rescue StandardError => e
+    DisplayPrint.input_index_error if e.message == 'invalid input'
+    DisplayPrint.column_full_error if e.message == 'column full'
     retry
   end
 
@@ -25,7 +29,7 @@ class ConnectFour
     @game_board.display_board
     DisplayPrint.player_turn(player_color)
 
-    index = input_index - 1
+    index = input_index
     @game_board.drop_coin(player_color, index)
   end
 

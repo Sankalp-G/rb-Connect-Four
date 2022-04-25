@@ -18,6 +18,17 @@ class ConnectFour
     retry
   end
 
+  # gets column index (1-7) from player in terminal
+  def fetch_index_from_player
+    index = get_player_input_between(1, 7) - 1
+    raise 'column full' if @game_board.column_full?(index)
+
+    index
+  rescue StandardError
+    DisplayPrint.column_full_error
+    retry
+  end
+
   # acts as an visual interface to #drop_coin, does not check if game is won
   def one_round(player_color)
     system('clear') || system('cls') # clear console
@@ -25,8 +36,7 @@ class ConnectFour
     @game_board.display_board
     DisplayPrint.player_turn(player_color)
 
-    index = get_player_input_between(1, 7) - 1
-    @game_board.drop_coin(player_color, index)
+    @game_board.drop_coin(player_color, fetch_index_from_player)
   end
 
   # starts a game between red and blue, returns winning color

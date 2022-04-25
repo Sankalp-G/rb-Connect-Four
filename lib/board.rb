@@ -37,6 +37,26 @@ class Board
     @board[column_index] = column
   end
 
+  # returns element if it occurs consecutively 4 or more times in the entire board else returns false
+  def win_condition
+    return consecutive_in_columns? if consecutive_in_columns?
+    return consecutive_in_rows? if consecutive_in_rows?
+    return consecutive_in_diagonals? if consecutive_in_diagonals?
+
+    false
+  end
+
+  # prints the board with colored coins, separated by '|'
+  def display_board
+    board = grab_rows.reverse
+    separator = '|'.colorize(color: :white, background: :black)
+    board.each do |row|
+      print separator
+      row.each { |coin| print color_coin(coin), separator }
+      puts
+    end
+  end
+
   # returns rows converted from @board
   def grab_rows
     rows = Array.new(6) { [] }
@@ -64,26 +84,6 @@ class Board
 
     sliced.each { |arr| return arr[0] if arr.length >= 4 && arr[0] != '' }
     false
-  end
-
-  # returns element if it occurs consecutively 4 or more times in the entire board else returns false
-  def win_condition
-    return consecutive_in_columns? if consecutive_in_columns?
-    return consecutive_in_rows? if consecutive_in_rows?
-    return consecutive_in_diagonals? if consecutive_in_diagonals?
-
-    false
-  end
-
-  # prints the board with colored coins, separated by '|'
-  def display_board
-    board = grab_rows.reverse
-    separator = '|'.colorize(color: :white, background: :black)
-    board.each do |row|
-      print separator
-      row.each { |coin| print color_coin(coin), separator }
-      puts
-    end
   end
 
   ### start of private methods

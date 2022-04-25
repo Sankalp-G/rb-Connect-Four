@@ -15,6 +15,28 @@ class ConnectFour
     end
   end
 
+  # starts a game between red and blue, returns winning color
+  def init_rounds
+    current_player = 'blue'
+    condition = @game_board.win_condition
+    until condition
+      one_round(current_player)
+      current_player = current_player == 'blue' ? 'red' : 'blue'
+      condition = @game_board.win_condition
+    end
+    condition
+  end
+
+  # acts as an visual interface to #drop_coin, does not check if game is won
+  def one_round(player_color)
+    system('clear') || system('cls') # clear console
+
+    @game_board.display_board
+    DisplayPrint.player_turn(player_color)
+
+    @game_board.drop_coin(player_color, fetch_index_from_player)
+  end
+
   # gets input from terminal and returns input as integer, retries if invalid
   def get_player_input_between(start_num, end_num)
     input = gets.chomp
@@ -35,28 +57,6 @@ class ConnectFour
   rescue StandardError
     DisplayPrint.column_full_error
     retry
-  end
-
-  # acts as an visual interface to #drop_coin, does not check if game is won
-  def one_round(player_color)
-    system('clear') || system('cls') # clear console
-
-    @game_board.display_board
-    DisplayPrint.player_turn(player_color)
-
-    @game_board.drop_coin(player_color, fetch_index_from_player)
-  end
-
-  # starts a game between red and blue, returns winning color
-  def init_rounds
-    current_player = 'blue'
-    condition = @game_board.win_condition
-    until condition
-      one_round(current_player)
-      current_player = current_player == 'blue' ? 'red' : 'blue'
-      condition = @game_board.win_condition
-    end
-    condition
   end
 
   # allow you to change the symbol used for each coin

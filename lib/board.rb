@@ -59,7 +59,7 @@ class Board
 
   # returns element if element occurs 4 or more times consecutively in given array
   # returns false otherwise, blank strings are ignored
-  def check_array(array)
+  def contains_consecutive?(array)
     sliced = array.slice_when { |before, after| before != after }
 
     sliced.each { |arr| return arr[0] if arr.length >= 4 && arr[0] != '' }
@@ -68,9 +68,9 @@ class Board
 
   # returns element if it occurs consecutively 4 or more times in the entire board else returns false
   def win_condition
-    return check_columns if check_columns
-    return check_rows if check_rows
-    return check_diagonals if check_diagonals
+    return consecutive_in_columns? if consecutive_in_columns?
+    return consecutive_in_rows? if consecutive_in_rows?
+    return consecutive_in_diagonals? if consecutive_in_diagonals?
 
     false
   end
@@ -110,22 +110,22 @@ class Board
   end
 
   # checks all column in @board for 4 consecutive elements, returns element if found else false
-  def check_columns
-    @board.each { |column| return check_array(column) if check_array(column) }
+  def consecutive_in_columns?
+    @board.each { |column| return contains_consecutive?(column) if contains_consecutive?(column) }
     false
   end
 
   # checks all row in @board for 4 consecutive elements, returns element if found else false
-  def check_rows
+  def consecutive_in_rows?
     rows = grab_rows
-    rows.each { |row| return check_array(row) if check_array(row) }
+    rows.each { |row| return contains_consecutive?(row) if contains_consecutive?(row) }
     false
   end
 
   # checks all diagonals in @board for 4 consecutive elements, returns element if found else false
-  def check_diagonals
+  def consecutive_in_diagonals?
     diagonals = grab_diagonals
-    diagonals.each { |diag| return check_array(diag) if check_array(diag) }
+    diagonals.each { |diag| return contains_consecutive?(diag) if contains_consecutive?(diag) }
     false
   end
 

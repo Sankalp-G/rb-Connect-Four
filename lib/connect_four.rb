@@ -22,7 +22,8 @@ class ConnectFour
       one_round_for(current_player)
       current_player = current_player == 'blue' ? 'red' : 'blue' # switch current player
     end
-    @game_board.win_condition
+    winner = @game_board.win_condition
+    game_over_screen_for(winner)
   end
 
   # plays a turn for the specified player color, does not check if game is won
@@ -32,6 +33,19 @@ class ConnectFour
     DisplayPrint.player_turn(player_color)
 
     @game_board.drop_coin(player_color, fetch_index_from_player)
+  end
+
+  def game_over_screen_for(winner)
+    clear_console
+    @game_board.display_board
+    DisplayPrint.game_over_text_for(winner)
+
+    @game_board.clear_board
+    case get_player_input_between(1, 3) # menu switch case
+    when 1 then init_rounds
+    when 2 then main_menu
+    when 3 then exit
+    end
   end
 
   # gets input from terminal and returns input as integer, retries if invalid

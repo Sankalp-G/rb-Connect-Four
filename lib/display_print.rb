@@ -28,8 +28,12 @@ module DisplayPrint
   end
 
   def self.game_over_text_for(winner)
-    winner_with_color = winner.colorize(color: :black, background: winner.to_sym)
-    puts "\n\n#{winner_with_color} HAS WON THE GAME! WELL DONE!\n\n"
+    if winner == 'tie'
+      puts "\n\nTHE GAME ENDS IN A TIE!\n\n"
+    else
+      winner_with_color = winner.colorize(color: :black, background: winner.to_sym)
+      puts "\n\n#{winner_with_color} HAS WON THE GAME! WELL DONE!\n\n"
+    end
 
     puts '[1] - Play Again'
     puts '[2] - Main Menu'

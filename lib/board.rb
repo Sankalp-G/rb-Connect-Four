@@ -17,6 +17,10 @@ class Board
     arr.map(&:clone)
   end
 
+  def clear_board
+    @board = create_board
+  end
+
   # checks if the given column number is full or not, true if full
   def column_full?(num)
     not_full = @board[num].include?('')

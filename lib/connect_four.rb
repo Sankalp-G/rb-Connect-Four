@@ -27,7 +27,7 @@ class ConnectFour
     condition
   end
 
-  # acts as an visual interface to #drop_coin, does not check if game is won
+  # plays a turn for the specified player color, does not check if game is won
   def one_round_for(player_color)
     system('clear') || system('cls') # clear console
 

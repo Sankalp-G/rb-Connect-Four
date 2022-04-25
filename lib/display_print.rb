@@ -2,7 +2,7 @@ require 'colorize'
 
 # contains various console puts for ConnectFour
 module DisplayPrint
-  def self.welcome_splash_screen
+  def self.logo_splash_screen
     puts <<~'HEREDOC'
       ┏━━━┓              ┏┓ ┏━━━┓
       ┃┏━┓┃             ┏┛┗┓┃┏━━┛
@@ -11,8 +11,6 @@ module DisplayPrint
       ┃┗━┛┃┗┛┃┃┃┃┃┃┃┃━┫┗━┫┗┓┃┃  ┃┗┛┃┗┛┃┃
       ┗━━━┻━━┻┛┗┻┛┗┻━━┻━━┻━┛┗┛  ┗━━┻━━┻┛
     HEREDOC
-    puts "\nEnter a number to select an option"
-    puts '[1] - Start Game'
   end
 
   def self.player_turn(player_color)

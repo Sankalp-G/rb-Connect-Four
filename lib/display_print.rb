@@ -27,8 +27,8 @@ module DisplayPrint
     puts 'Enter the column number u want to drop your coin in. (1 - 7)'
   end
 
-  def self.input_index_error
-    puts "\n\nInvalid Input, input must be a number from 1 to 7\nTry Again"
+  def self.input_error_num_between(start_num, end_num)
+    puts "\n\nInvalid Input, input must be a number from #{start_num} to #{end_num}\nTry Again"
   end
 
   def self.column_full_error

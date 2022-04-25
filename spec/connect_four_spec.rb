@@ -24,7 +24,7 @@ describe ConnectFour do
           allow(DisplayPrint).to receive(:puts)
         end
         it 'puts error twice' do
-          expect(DisplayPrint).to receive(:input_index_error).twice
+          expect(DisplayPrint).to receive(:input_error_num_between).twice
           cfour.get_player_input_between(2, 5)
         end
         it 'returns valid input as integer' do

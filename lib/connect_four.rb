@@ -22,7 +22,7 @@ class ConnectFour
 
     input.to_i
   rescue StandardError
-    DisplayPrint.input_index_error
+    DisplayPrint.input_error_num_between(start_num, end_num)
     retry
   end
 

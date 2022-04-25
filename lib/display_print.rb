@@ -27,6 +27,15 @@ module DisplayPrint
     puts 'Enter the column number u want to drop your coin in. (1 - 7)'
   end
 
+  def self.game_over_text_for(winner)
+    winner_with_color = winner.colorize(color: :black, background: winner.to_sym)
+    puts "\n\n#{winner_with_color} HAS WON THE GAME! WELL DONE!\n\n"
+
+    puts '[1] - Play Again'
+    puts '[2] - Main Menu'
+    puts '[3] - Exit'
+  end
+
   def self.input_error_num_between(start_num, end_num)
     puts "\n\nInvalid Input, input must be a number from #{start_num} to #{end_num}\nTry Again"
   end

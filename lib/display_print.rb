@@ -24,7 +24,7 @@ module DisplayPrint
   def self.player_turn(player_color)
     player_name = player_color.colorize(color: :black, background: player_color.to_sym)
     puts "\n#{player_name} Turn:"
-    puts 'Enter the column number u want to drop your coin in. (1 . 7s)'
+    puts 'Enter the column number u want to drop your coin in. (1 - 7)'
   end
 
   def self.input_index_error

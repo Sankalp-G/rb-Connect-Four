@@ -7,6 +7,14 @@ class ConnectFour
     @game_board = Board.new
   end
 
+  def main_menu
+    DisplayPrint.menu_screen
+
+    case get_player_input_between(1, 1)
+    when 1 then init_rounds
+    end
+  end
+
   # gets input from terminal and returns input as integer, retries if invalid
   def get_player_input_between(start_num, end_num)
     input = gets.chomp

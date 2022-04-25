@@ -20,7 +20,7 @@ class ConnectFour
     current_player = 'blue'
     condition = @game_board.win_condition
     until condition
-      one_round(current_player)
+      one_round_for(current_player)
       current_player = current_player == 'blue' ? 'red' : 'blue'
       condition = @game_board.win_condition
     end
@@ -28,7 +28,7 @@ class ConnectFour
   end
 
   # acts as an visual interface to #drop_coin, does not check if game is won
-  def one_round(player_color)
+  def one_round_for(player_color)
     system('clear') || system('cls') # clear console
 
     @game_board.display_board

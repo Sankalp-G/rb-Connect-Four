@@ -164,6 +164,16 @@ describe Board do
         end
       end
     end
+
+    context 'there are no available spaces on the board' do
+      before do
+        board = [[1], [2], [3], [4]]
+        c4_board.instance_variable_set(:@board, board)
+      end
+      it 'returns tie' do
+        expect(c4_board.win_condition).to eql('tie')
+      end
+    end
   end
 
   describe '#contains_consecutive?' do

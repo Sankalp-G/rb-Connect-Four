@@ -46,6 +46,7 @@ class Board
     return consecutive_in_columns? if consecutive_in_columns?
     return consecutive_in_rows? if consecutive_in_rows?
     return consecutive_in_diagonals? if consecutive_in_diagonals?
+    return 'tie' unless @board.flatten.include?('') # there are no spaces on the board
 
     false
   end

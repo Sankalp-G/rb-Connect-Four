@@ -13,6 +13,14 @@ module DisplayPrint
     HEREDOC
   end
 
+  def self.menu_screen
+    system('clear') || system('cls') # clear console
+
+    logo_splash_screen
+    puts "\n\nEnter the number for the option you want to choose"
+    puts '[1] - Start Game'
+  end
+
   def self.player_turn(player_color)
     player_name = player_color.colorize(color: :black, background: player_color.to_sym)
     puts "\n#{player_name} Turn:"

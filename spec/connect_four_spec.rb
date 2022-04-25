@@ -78,15 +78,19 @@ describe ConnectFour do
       before do
         cfour.instance_variable_set(:@game_board, round_board)
         allow(cfour).to receive(:one_round_for)
+        allow(cfour).to receive(:game_over_screen_for)
+        allow(round_board).to receive(:display_board)
+        allow(round_board).to receive(:clear_board)
         allow(round_board).to receive(:win_condition).and_return(false, false, false, false, 'blue')
       end
       it 'calls #one_round_for 4 times' do
         expect(cfour).to receive(:one_round_for).exactly(4).times
         cfour.init_rounds
       end
-      it 'returns winning player' do
+      it 'calls end screen with winning player' do
         winning_player = 'blue'
-        expect(cfour.init_rounds).to eql(winning_player)
+        expect(cfour).to receive(:game_over_screen_for).with(winning_player)
+        cfour.init_rounds
       end
     end
   end

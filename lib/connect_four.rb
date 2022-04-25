@@ -27,8 +27,7 @@ class ConnectFour
 
   # plays a turn for the specified player color, does not check if game is won
   def one_round_for(player_color)
-    system('clear') || system('cls') # clear console
-
+    clear_console
     @game_board.display_board
     DisplayPrint.player_turn(player_color)
 
@@ -60,5 +59,9 @@ class ConnectFour
   # allow you to change the symbol used for each coin
   def change_coin(coin_face)
     @game_board.coin = coin_face
+  end
+
+  def clear_console
+    system('clear') || system('cls')
   end
 end

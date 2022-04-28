@@ -69,6 +69,13 @@ class Board
       row.each { |coin| print color_coin(coin), separator }
       puts
     end
+    print_index_row
+  end
+
+  def print_index_row
+    separator = '|'.colorize(color: :white, background: :black)
+    7.times { |i| print separator, (i + 1) }
+    print separator, "\n"
   end
 
   # returns rows converted from @board

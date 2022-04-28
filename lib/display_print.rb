@@ -26,8 +26,10 @@ module DisplayPrint
 
   def self.options_screen
     puts "\nSome terminals have problems with the unicode coins, u can replace them here\n"
+    puts "you can toggle the index numbers here as well\n"
     puts '[1] - Change coin symbol'
-    puts '[2] - Back'
+    puts '[2] - Toggle column index row'
+    puts '[3] - Back'
   end
 
   def self.player_turn(player_color)

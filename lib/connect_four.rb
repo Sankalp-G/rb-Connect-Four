@@ -22,9 +22,12 @@ class ConnectFour
     @game_board.display_example_board
     DisplayPrint.options_screen
 
-    case get_player_input_between(1, 2)
+    case get_player_input_between(1, 3)
     when 1 then coin_change_interface
-    when 2 then main_menu
+    when 2
+      @game_board.toggle_index_row
+      options_menu
+    when 3 then main_menu
     end
   end
 

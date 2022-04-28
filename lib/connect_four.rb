@@ -48,6 +48,12 @@ class ConnectFour
     end
   end
 
+  def coin_change_interface
+    puts "\n\nType in the symbol you want to use as the coin face"
+    symbol = gets.chomp
+    change_coin(symbol)
+  end
+
   # gets input from terminal and returns input as integer, retries if invalid
   def get_player_input_between(start_num, end_num)
     input = gets.chomp

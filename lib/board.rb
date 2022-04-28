@@ -56,7 +56,7 @@ class Board
     return consecutive_in_columns? if consecutive_in_columns?
     return consecutive_in_rows? if consecutive_in_rows?
     return consecutive_in_diagonals? if consecutive_in_diagonals?
-    return 'tie' unless @board.flatten.include?('') # there are no spaces on the board
+    return 'tie' if tie?
 
     false
   end
@@ -153,6 +153,10 @@ class Board
     diagonals = grab_diagonals
     diagonals.each { |diag| return contains_consecutive?(diag) if contains_consecutive?(diag) }
     false
+  end
+
+  def tie?
+    !@board.flatten.include?('') # there are no spaces on the board
   end
 
   # uses colorize gem to return a colored coin using color from parameter

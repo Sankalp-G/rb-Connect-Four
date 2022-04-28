@@ -22,6 +22,12 @@ module DisplayPrint
     puts '[1] - Start Game'
   end
 
+  def self.options_screen
+    puts "\nSome terminals have problems with the unicode coins, u can replace them here\n"
+    puts '[1] - Change coin symbol'
+    puts '[2] - Back'
+  end
+
   def self.player_turn(player_color)
     player_name = player_color.colorize(color: :black, background: player_color.to_sym)
     puts "\n#{player_name} Turn:"

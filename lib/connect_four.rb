@@ -7,6 +7,10 @@ class ConnectFour
     @game_board = Board.new
   end
 
+  def start_game
+    main_menu
+  end
+
   def main_menu
     DisplayPrint.menu_screen
 

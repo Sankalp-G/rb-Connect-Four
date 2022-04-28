@@ -1,3 +1,4 @@
+require_relative 'board'
 require 'colorize'
 
 # contains various console puts for ConnectFour

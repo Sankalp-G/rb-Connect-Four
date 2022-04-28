@@ -21,6 +21,15 @@ class Board
     @board = create_board
   end
 
+  # prints out an example board
+  def display_example_board
+    example_board = clone
+    example_board.clear_board
+    6.times { example_board.drop_coin('blue', 2) }
+    6.times { example_board.drop_coin('red', 4) }
+    example_board.display_board
+  end
+
   # checks if the given column number is full or not, true if full
   def column_full?(num)
     not_full = @board[num].include?('')

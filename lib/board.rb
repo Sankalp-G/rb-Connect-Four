@@ -8,6 +8,7 @@ class Board
   def initialize
     @board = create_board
     @coin = '⬤'
+    @enable_index_row = true
   end
 
   # creates a 7x6 2d array filled with blank strings
@@ -69,13 +70,17 @@ class Board
       row.each { |coin| print color_coin(coin), separator }
       puts
     end
-    print_index_row
+    print_index_row if @enable_index_row
   end
 
   def print_index_row
     separator = '|'.colorize(color: :white, background: :black)
     7.times { |i| print separator, (i + 1) }
     print separator, "\n"
+  end
+
+  def toggle_index_row
+    @enable_index_row = !@enable_index_row
   end
 
   # returns rows converted from @board

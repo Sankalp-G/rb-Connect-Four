@@ -15,6 +15,17 @@ class ConnectFour
     end
   end
 
+  def options_menu
+    clear_console
+    @game_board.display_example_board
+    DisplayPrint.options_screen
+
+    case get_player_input_between(1, 2)
+    when 1 then coin_change_interface
+    when 2 then main_menu
+    end
+  end
+
   # starts a game between red and blue, returns winning color
   def init_rounds
     current_player = 'blue'
@@ -52,6 +63,7 @@ class ConnectFour
     puts "\n\nType in the symbol you want to use as the coin face"
     symbol = gets.chomp
     change_coin(symbol)
+    options_menu
   end
 
   # gets input from terminal and returns input as integer, retries if invalid

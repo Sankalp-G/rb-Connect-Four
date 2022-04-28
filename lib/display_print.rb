@@ -20,6 +20,8 @@ module DisplayPrint
     logo_splash_screen
     puts "\n\nEnter the number for the option you want to choose"
     puts '[1] - Start Game'
+    puts '[2] - Options'
+    puts '[3] - Exit'
   end
 
   def self.options_screen

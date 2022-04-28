@@ -10,8 +10,10 @@ class ConnectFour
   def main_menu
     DisplayPrint.menu_screen
 
-    case get_player_input_between(1, 1)
+    case get_player_input_between(1, 3)
     when 1 then init_rounds
+    when 2 then options_menu
+    when 3 then exit
     end
   end
 

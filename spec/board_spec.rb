@@ -141,6 +141,32 @@ describe Board do
     end
   end
 
+  describe 'check_for_consecutive_in' do
+    context 'there are consecutive elements in 3rd array' do
+      let(:input_2d_array) { [['', '', '', ''], %w[red blue green yellow], %w[blue blue blue blue]] }
+      before do
+        allow(c4_board).to receive(:contains_consecutive?).and_return(false, false, 'blue', 'blue')
+      end
+      it 'calls #contains_consecutive? 5 times' do
+        expect(c4_board).to receive(:contains_consecutive?).exactly(4).times
+        c4_board.check_for_consecutive_in(input_2d_array)
+      end
+      it 'return consecutive element' do
+        expect(c4_board.check_for_consecutive_in(input_2d_array)).to eql('blue')
+      end
+    end
+
+    context 'there are no consecutive elements' do
+      before do
+        allow(c4_board).to receive(:contains_consecutive?) { false }
+      end
+      it 'returns false' do
+        input_2d_array = [['a'], ['b', 'c'], ['d']]
+        expect(c4_board.check_for_consecutive_in(input_2d_array)).to eql(false)
+      end
+    end
+  end
+
   # expect all items of an enum to have given length
   RSpec::Matchers.define :all_have_length do |expected_length|
     match do |enum|

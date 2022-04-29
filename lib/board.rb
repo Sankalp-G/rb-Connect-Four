@@ -112,6 +112,12 @@ class Board
     false
   end
 
+  # checks for consecutive in all sub arrays returns element if found, else returns false
+  def check_for_consecutive_in(array_2d)
+    array_2d.each { |array| return contains_consecutive?(array) if contains_consecutive?(array) }
+    false
+  end
+
   ### start of private methods
   private
 
@@ -137,22 +143,20 @@ class Board
 
   # checks all column in @board for 4 consecutive elements, returns element if found else false
   def consecutive_in_columns?
-    @board.each { |column| return contains_consecutive?(column) if contains_consecutive?(column) }
-    false
+    columns = @board
+    check_for_consecutive_in(columns)
   end
 
   # checks all row in @board for 4 consecutive elements, returns element if found else false
   def consecutive_in_rows?
     rows = grab_rows
-    rows.each { |row| return contains_consecutive?(row) if contains_consecutive?(row) }
-    false
+    check_for_consecutive_in(rows)
   end
 
   # checks all diagonals in @board for 4 consecutive elements, returns element if found else false
   def consecutive_in_diagonals?
     diagonals = grab_diagonals
-    diagonals.each { |diag| return contains_consecutive?(diag) if contains_consecutive?(diag) }
-    false
+    check_for_consecutive_in(diagonals)
   end
 
   def tie?

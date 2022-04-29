@@ -10,6 +10,7 @@ describe ConnectFour do
         valid_input = '5'
         allow(cfour).to receive(:gets).and_return(valid_input)
       end
+
       it 'returns input as integer' do
         expect(cfour.get_player_input_between(1, 7)).to eql(5)
       end
@@ -23,10 +24,12 @@ describe ConnectFour do
           allow(cfour).to receive(:gets).and_return(*invalid_inputs, valid_input)
           allow(DisplayPrint).to receive(:puts)
         end
+
         it 'puts error twice' do
           expect(DisplayPrint).to receive(:input_error_num_between).twice
           cfour.get_player_input_between(2, 5)
         end
+
         it 'returns valid input as integer' do
           expect(cfour.get_player_input_between(2, 5)).to eql(3)
         end
@@ -40,9 +43,11 @@ describe ConnectFour do
         valid_input = '3'
         allow(cfour).to receive(:gets).and_return(valid_input)
       end
+
       it 'returns input as integer' do
         expect(cfour.fetch_index_from_player).to eql(2)
       end
+
       it 'does not raise error' do
         expect { cfour.fetch_index_from_player }.to_not raise_error
       end
@@ -60,10 +65,12 @@ describe ConnectFour do
           allow(get_index_board).to receive(:column_full?).and_return(true, true, false)
           cfour.instance_variable_set(:@game_board, get_index_board)
         end
+
         it 'puts error twice' do
           expect(DisplayPrint).to receive(:column_full_error).twice
           cfour.fetch_index_from_player
         end
+
         it 'returns valid input as integer' do
           expect(cfour.fetch_index_from_player).to eql(2)
         end
@@ -81,10 +88,12 @@ describe ConnectFour do
         allow(cfour).to receive(:game_over_screen_for)
         allow(round_board).to receive(:win_condition).and_return(false, false, false, false, 'blue')
       end
+
       it 'calls #one_round_for 4 times' do
         expect(cfour).to receive(:one_round_for).exactly(4).times
         cfour.init_rounds
       end
+
       it 'calls end screen with winning player' do
         winning_player = 'blue'
         expect(cfour).to receive(:game_over_screen_for).with(winning_player)

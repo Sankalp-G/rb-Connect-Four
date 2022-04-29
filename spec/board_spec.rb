@@ -52,6 +52,7 @@ describe Board do
         half_array[1] = ['blue', 'blue', 'blue', '', '', '']
         half_board.instance_variable_set(:@board, half_array)
       end
+
       it 'returns false' do
         output = half_board.column_full?(1)
         expect(output).to eql(false)
@@ -65,6 +66,7 @@ describe Board do
         full_array = Array.new(7, Array.new(6, 'red'))
         full_board.instance_variable_set(:@board, full_array)
       end
+
       it 'returns true' do
         output = full_board.column_full?(4)
         expect(output).to eql(true)
@@ -110,6 +112,7 @@ describe Board do
           expect(output).to eql(false)
         end
       end
+
       context 'array with multiple elements' do
         it 'returns false' do
           array = ['blue', 'blue', 'red', 2, 3, 'blue', 'blue']
@@ -118,6 +121,7 @@ describe Board do
         end
       end
     end
+
     context 'array does contain four or more consecutive elements' do
       context 'array with some blank strings' do
         it 'returns true' do
@@ -125,12 +129,14 @@ describe Board do
           output = c4_board.contains_consecutive?(array)
           expect(output).to eql('blue')
         end
+
         it 'returns true' do
           array = ['', '', 'red', 'red', 'red', 'red', 'red']
           output = c4_board.contains_consecutive?(array)
           expect(output).to eql('red')
         end
       end
+
       context 'array with multiple elements' do
         it 'returns true' do
           array = %w[red blue blue blue blue green]
@@ -147,10 +153,12 @@ describe Board do
       before do
         allow(c4_board).to receive(:contains_consecutive?).and_return(false, false, 'blue', 'blue')
       end
+
       it 'calls #contains_consecutive? 5 times' do
         expect(c4_board).to receive(:contains_consecutive?).exactly(4).times
         c4_board.check_for_consecutive_in(input_2d_array)
       end
+
       it 'return consecutive element' do
         expect(c4_board.check_for_consecutive_in(input_2d_array)).to eql('blue')
       end
@@ -160,6 +168,7 @@ describe Board do
       before do
         allow(c4_board).to receive(:contains_consecutive?) { false }
       end
+
       it 'returns false' do
         input_2d_array = [['a'], ['b', 'c'], ['d']]
         expect(c4_board.check_for_consecutive_in(input_2d_array)).to eql(false)
@@ -204,6 +213,7 @@ describe Board do
         expect(num_of_rows).to eql(6)
         expect(rows).to all_have_length(7)
       end
+
       it 'returns the rows' do
         expected_rows = [['blue', 'red', 'blue', 'red',  'red', 'blue', 'red'],
                          ['blue', 'red', 'blue', 'blue', 'red', 'blue', ''],
@@ -226,10 +236,12 @@ describe Board do
                        ['', '', '', '']]
         c4_board.instance_variable_set(:@board, input_board)
       end
+
       it 'raises an error' do
         expect { c4_board.grab_diagonals }.to raise_error('columns must be of equal length')
       end
     end
+
     context 'with a random board' do
       before do
         input_board = [['blue', 'blue', 'blue',   '',    '',     ''],
@@ -241,6 +253,7 @@ describe Board do
                        ['red',  '',      '',      '',    '',     '']]
         c4_board.instance_variable_set(:@board, input_board)
       end
+
       it 'returns arrays of all diagonals' do
         expected = [['red'], ['blue', ''], ['red', 'blue', ''], ['red', 'red', 'blue', ''],
                     ['blue', 'blue', 'red', '', ''], ['red', 'blue', 'blue', '', '', ''],

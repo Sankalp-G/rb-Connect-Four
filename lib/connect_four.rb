@@ -71,7 +71,7 @@ class ConnectFour
   def coin_change_interface
     puts "\n\nType in the symbol you want to use as the coin face"
     symbol = gets.chomp
-    change_coin(symbol)
+    change_coin_to(symbol)
     options_menu
   end
 
@@ -98,7 +98,7 @@ class ConnectFour
   end
 
   # allow you to change the symbol used for each coin
-  def change_coin(coin_face)
+  def change_coin_to(coin_face)
     @game_board.coin = coin_face
   end
 

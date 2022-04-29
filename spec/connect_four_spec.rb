@@ -79,8 +79,6 @@ describe ConnectFour do
         cfour.instance_variable_set(:@game_board, round_board)
         allow(cfour).to receive(:one_round_for)
         allow(cfour).to receive(:game_over_screen_for)
-        allow(round_board).to receive(:display_board)
-        allow(round_board).to receive(:clear_board)
         allow(round_board).to receive(:win_condition).and_return(false, false, false, false, 'blue')
       end
       it 'calls #one_round_for 4 times' do
